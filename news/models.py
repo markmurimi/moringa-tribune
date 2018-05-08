@@ -20,6 +20,10 @@ class tags(models.Model):
 
     def __str__(self):
         return self.name
+        
+class NewsLetterRecipients(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField()
 
 class Article(models.Model):
     title = models.CharField(max_length =60)
@@ -29,6 +33,8 @@ class Article(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     article_image = models.ImageField(upload_to = 'articles/')
 
+    def __str__(self):
+        return self.title
 
     @classmethod
     def todays_news(cls):
