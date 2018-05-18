@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from .models import  MoringaMerch
 from .serializers import MerchSerializer
 from rest_framework import status
+from .permissions import IsAdminOrReadOnly
 
 
 
@@ -95,6 +96,7 @@ def newsletter(request):
 
 
 class MerchList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
     def get(self, request, format=None):
         all_merch = MoringaMerch.objects.all()
         serializers = MerchSerializer(all_merch, many=True)
